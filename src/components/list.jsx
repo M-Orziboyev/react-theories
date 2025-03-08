@@ -17,13 +17,12 @@ class List extends Component {
 
 
     render() {
-        const {number, title, id} = this.props;
+        const {number, title, id, active} = this.props;
         const {counter} = this.state;
         return (
             <div className='shopping-list'>
-                <div className='list-item'>
+                <div key={id} className={`list-item ${active && 'active'}`}>
                     <div className='item-info'>
-                        <h1>{id}</h1>
                         <span>{number}</span>
                         <p>{title}</p>
                     </div>
