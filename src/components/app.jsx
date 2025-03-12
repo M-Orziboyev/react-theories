@@ -42,8 +42,8 @@ function App() {
                     <div className="card">
                         <Information/>
                         <Form/>
-                        {data.map(({number, title, id}) => (
-                            <List number={number} title={title} key={id}/>
+                        {data.map(({number, title, id, active}) => (
+                            <List number={number} title={title} key={id} active={active}/>
                         ))}
                         <Filter/>
                     </div>
