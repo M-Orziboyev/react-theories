@@ -1,57 +1,55 @@
-import {useState} from 'react'
+import {Component} from 'react'
 import '../index.css'
 import Information from "./information.jsx";
 import Form from "./form.jsx";
-import Lists from "./list.jsx";
 import Filter from "./filter.jsx";
 import List from "./list.jsx";
+import {arr} from "./constants/index.js";
 
-function App() {
+class App extends Component {
 
-    const data = [
-        {
-            number: 14,
-            title: 'Buy Bananas',
-            id: 1,
-            active: false
-        },
-        {
-            number: 13,
-            title: 'Buy pineapples',
-            id: 2,
-            active: true
-        },
-        {
-            number: 12,
-            title: 'Buy pancakes',
-            id: 3,
-            active: false
-        },
-        {
-            number: 11,
-            title: 'Buy Graces',
-            id: 4,
-            active: false,
-        },
-    ]
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: arr
+        }
+    }
 
-    return (
-        <>
+    onDelete = (id) => {
+        const newArr = this.state.data.filter(item => item.id !== id)
+        this.setState({
+            data: newArr
+        })
+    }
+
+    onToggleActive = (id) => {
+        const newArr = this.state.data.map(item => {
+            if (item.id === id) {
+                return{...item, active: !item.active}
+            }
+            return item
+        })
+        this.setState({
+            data: newArr
+        })
+    }
+
+    render() {
+        const {data} = this.state
+        return(
             <div className="app">
                 <div className="wrapper">
                     <div className="card">
                         <Information/>
                         <Form/>
-                        {data.map(({number, title, id, active}) => (
-                            <List number={number} title={title} key={id} active={active}/>
-                        ))}
+                        <List data={data} onDelete={this.onDelete} onToggleItem={this.onToggleActive}/>
                         <Filter/>
                     </div>
                     <img src="/images/earth.svg" alt="earth"/>
                 </div>
             </div>
-        </>
-    )
+        )
+    }
 }
 
 export default App

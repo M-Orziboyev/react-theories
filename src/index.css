@@ -212,7 +212,14 @@
     background-color: #ffd700;
     color: #000;
 }
-.active{
-    background-color: #ffd700;
-    color: #000;
+@media only screen and (max-width: 800px) {
+    .wrapper{
+        grid-template-column: 100%;
+    }
+    .wrapper img{
+        display: none;
+    }
+    .card{
+        height: 100vh;
+    }
 }
