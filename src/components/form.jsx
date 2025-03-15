@@ -20,7 +20,11 @@ class ShoppingAddForm extends React.Component {
             title: this.state.title,
             number: this.state.number
         }
-        console.log(data)
+        if (!data.number.length || !data.title.length) {
+            alert('Form should be completely filled')
+        } else {
+            this.props.onAdd(data)
+        }
     }
 
     render() {
