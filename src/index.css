@@ -212,6 +212,21 @@
     background-color: #ffd700;
     color: #000;
 }
+
+/* Search Panel */
+
+.search{
+    margin-top: 30px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    height: 45px;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    width: 100%;
+}
+
+/* MEDIA */
 @media only screen and (max-width: 800px) {
     .wrapper{
         grid-template-column: 100%;
