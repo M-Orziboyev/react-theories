@@ -4,7 +4,7 @@ class ShoppingAddForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: "",
+            title: "Buy ",
             number: ""
         }
     }

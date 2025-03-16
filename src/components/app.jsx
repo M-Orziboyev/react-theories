@@ -14,7 +14,8 @@ class App extends Component {
         super(props);
         this.state = {
             data: arr,
-            search: ""
+            search: "",
+            filter: "all"
         }
     }
 
@@ -47,7 +48,7 @@ class App extends Component {
     }
 
     searchData = (arr, term) => {
-        if (term.length === 0){
+        if (term.length === 0) {
             return arr
         }
 
@@ -58,10 +59,24 @@ class App extends Component {
         this.setState({search})
     }
 
+    filterList = (arr, filter) => {
+        switch (filter) {
+            case 'completed':
+                return arr.filter(item => item.active)
+            case 'big-sized':
+                return arr.filter(item => item.number > 10)
+            default:
+                return arr
+        }
+    }
+
+    onFilterList = (filter) => {
+        this.setState({filter})
+    }
 
     render() {
-        const {data, search} = this.state
-        const allData = this.searchData(data, search)
+        const {data, search, filter} = this.state
+        const allData = this.filterList(this.searchData(data, search), filter)
 
         return (
             <div className="app">
@@ -71,7 +86,7 @@ class App extends Component {
                         <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
                         <Form onAdd={this.onAdd}/>
                         <List data={allData} onDelete={this.onDelete} onToggleItem={this.onToggleActive}/>
-                        <Filter/>
+                        <Filter filter={filter} onFilterList={this.onFilterList}/>
                     </div>
                     <img src="/images/earth.svg" alt="earth"/>
                 </div>
